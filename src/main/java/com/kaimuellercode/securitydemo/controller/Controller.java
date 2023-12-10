@@ -1,6 +1,8 @@
 package com.kaimuellercode.securitydemo.controller;
 
+import com.kaimuellercode.securitydemo.security.UserPrinciple;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +15,8 @@ public class Controller {
     }
 
     @GetMapping("/secured")
-        public String secured(){
-        return "Successfully logged in!";
+        public String secured(@AuthenticationPrincipal UserPrinciple principle){
+        return "Successfully logged in! Hello User " + principle.getEmail()
+                + " with ID : " + principle.getUserId();
     }
 }

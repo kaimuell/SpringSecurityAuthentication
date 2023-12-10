@@ -1,5 +1,6 @@
 package com.kaimuellercode.securitydemo.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,9 @@ public class UserPrinciple implements UserDetails {
     private final Long userId;
     private final String email;
 
+    @JsonIgnore
+    private final String password;
+
     public Collection<? extends GrantedAuthority> authorities;
 
     @Override
@@ -26,7 +30,7 @@ public class UserPrinciple implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
